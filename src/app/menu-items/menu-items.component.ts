@@ -3,11 +3,11 @@ import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   standalone: false,
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-menu-items',
+  templateUrl: './menu-items.component.html',
+  styleUrl: './menu-items.component.css'
 })
-export class HomeComponent {
+export class MenuItemsComponent {
 
   user: any = {
     email: "",
@@ -37,5 +37,4 @@ export class HomeComponent {
       }
     })
   }
-
 }

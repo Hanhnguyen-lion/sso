@@ -9,14 +9,24 @@ import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
+import { ProductsComponent } from '../products/products.component';
+import { OrdersComponent } from '../orders/orders.component';
+import { StocksComponent } from '../stocks/stocks.component';
+import { InvestmentsComponent } from '../investments/investments.component';
+import { MenuItemsComponent } from '../menu-items/menu-items.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuItemsComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent,
+    OrdersComponent,
+    StocksComponent,
+    InvestmentsComponent
   ],
   imports: [
     BrowserModule,

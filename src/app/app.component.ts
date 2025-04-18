@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
+  standalone: false,
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'sso';
+  title = 'Single Sign On';
+
+  constructor(public auth: AuthService){
+  }
+
+  login(){
+    this.auth.loginWithRedirect();
+  }
+
+  logout(){
+    this.auth.logout();
+  }
+
+  isAuthenticated(){
+    this.auth.isAuthenticated$.subscribe((isAuthenticated: boolean) =>{
+      return isAuthenticated;
+    })
+  }
 }

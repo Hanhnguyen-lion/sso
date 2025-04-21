@@ -1,6 +1,6 @@
 <app-menu-items></app-menu-items>
 <div>
-    <div class="font-weight-bold text-center"><b>Interests List</b></div>
+    <div class="font-weight-bold text-center"><b>Inventory List</b></div>
     <br/>
     <div class="table-responsive text-center">
         <table class="table table-striped">
@@ -11,21 +11,21 @@
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Interests</th>
+                    <th scope="col">Order Quantity</th>
+                    <th scope="col">Inventory Quantity</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let order of orders | async; index as idx">
+                <tr *ngFor="let order of inventories | async; index as idx">
                     <th scope="row">{{idx + 1}}</th>
                     <td>{{order.OrderDate | date: 'MM/dd/yyyy' }}</td>
                     <td>{{order.Description}}</td>
                     <td>{{order.Price | number: '1.2-2' }}</td>
                     <td>{{order.Quantity}}</td>
-                    <td>{{order.Amount | number: '1.2-2' }}</td>
-                    <td>{{order.Total | number: '1.2-2'}}</td>
-                    <td>{{order.Interest | number: '1.2-2'}}</td>
+                    <td>{{order.Total | number: '1.2-2' }}</td>
+                    <td>{{order.OrderQuantity}}</td>
+                    <td>{{order.InventoryQuantity}}</td>
                 </tr>
             </tbody>
         </table>

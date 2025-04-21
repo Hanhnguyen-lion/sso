@@ -11,9 +11,10 @@ import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
 import { ProductsComponent } from '../products/products.component';
 import { OrdersComponent } from '../orders/orders.component';
-import { StocksComponent } from '../stocks/stocks.component';
 import { InvestmentsComponent } from '../investments/investments.component';
 import { MenuItemsComponent } from '../menu-items/menu-items.component';
+import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { InventoryComponent } from '../inventory/inventory.component';
 
 
 
@@ -25,11 +26,12 @@ import { MenuItemsComponent } from '../menu-items/menu-items.component';
     HomeComponent,
     ProductsComponent,
     OrdersComponent,
-    StocksComponent,
-    InvestmentsComponent
+    InvestmentsComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterOutlet,
     CommonModule,
     FormsModule,

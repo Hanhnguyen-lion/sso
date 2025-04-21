@@ -12,10 +12,10 @@
           <a class="nav-link" routerLink="/orders" >Orders</a>
         </li>
         <li *ngIf="isAuthenticated()" class="nav-item">
-          <a class="nav-link" routerLink="/stocks" >Stocks</a>
+          <a class="nav-link" routerLink="/investments">Investments</a>
         </li>
         <li *ngIf="isAuthenticated()" class="nav-item">
-          <a class="nav-link" routerLink="/investments">Investments</a>
+          <a class="nav-link" routerLink="/inventory" >Inventory Management</a>
         </li>
         <li *ngIf="isAuthenticated()" class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>

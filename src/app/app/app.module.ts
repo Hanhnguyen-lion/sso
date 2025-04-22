@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import {AuthModule} from "@auth0/auth0-angular"
 import { enviroment } from '../enviroment';
 import { RouterOutlet } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
 import { AppRoutingModule } from '../app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
 import { ProductsComponent } from '../products/products.component';
 import { OrdersComponent } from '../orders/orders.component';
 import { InvestmentsComponent } from '../investments/investments.component';
 import { MenuItemsComponent } from '../menu-items/menu-items.component';
-import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { InventoryComponent } from '../inventory/inventory.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 
@@ -27,14 +29,17 @@ import { InventoryComponent } from '../inventory/inventory.component';
     ProductsComponent,
     OrdersComponent,
     InvestmentsComponent,
-    InventoryComponent
+    InventoryComponent,
+    ConfirmDialogComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     HttpClientModule,
     RouterOutlet,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthModule.forRoot({
       domain: enviroment.auth.domain,
       clientId: enviroment.auth.clientid,
@@ -46,6 +51,9 @@ import { InventoryComponent } from '../inventory/inventory.component';
   ],
   bootstrap:[
     AppComponent
+  ],
+  providers:[
+    DatePipe
   ]
 })
 export class AppModule { }

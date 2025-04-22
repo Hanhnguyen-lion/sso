@@ -7,5 +7,6 @@ export interface Inventory{
     Total: number,
     OrderQuantity: number,
     InventoryQuantity: number,
+    Interest: number,
     OrderDate: Date
 }

@@ -1,34 +1,114 @@
 <app-menu-items></app-menu-items>
 <div>
-    <div class="font-weight-bold text-center"><b>Order List</b></div>
-    <br/>
-    <div class="table-responsive text-center">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of orders | async; index as idx">
-                    <th scope="row">{{idx + 1}}</th>
-                    <td>{{order.OrderDate | date: 'MM/dd/yyyy' }}</td>
-                    <td>{{order.Description}}</td>
-                    <td>{{order.Amount | number: '1.2-2' }}</td>
-                    <td>{{order.Quantity}}</td>
-                    <td>{{order.Total | number: '1.2-2'}}</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary">Edit</button>&nbsp;
-                        <button type="button" class="btn btn-outline-primary">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <form  class="form-horizontal" [formGroup]="ordersGroup">
+        <h1 style="text-align: center;">Orders List</h1>
+        <br/>
+        <div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Order Date:</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" placeholder="Order Date" formControlName="OrderDate">
+                </div>
+                <div *ngIf="displayErrorOnForm(ordersGroup, 'OrderDate') && ordersGroup.controls.OrderDate.hasError('required')" class="alert alert-danger">
+                    Order Date is required
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Products:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" formControlName="ProductId">
+                        <option value="" disabled>Choose a Product</option>
+                        <option *ngFor="let item of products | async" [ngValue]="item.ProductId">{{ item.Description }}</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Quantity:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" placeholder="Quantity" formControlName="Quantity">
+                </div>
+                <div *ngIf="displayErrorOnForm(ordersGroup, 'Quantity')" class="alert alert-danger">
+                    <div *ngIf="ordersGroup.controls.Quantity.hasError('required')">
+                        Quantity is required
+                    </div>
+                    <div *ngIf="ordersGroup.controls.Quantity.hasError('min')">
+                        Quantity must be greater than or equal 1
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Amount:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" placeholder="Amount" formControlName="Amount">
+                </div>
+                <div *ngIf="displayErrorOnForm(ordersGroup, 'Amount')" class="alert alert-danger">
+                    <div *ngIf="ordersGroup.controls.Amount.hasError('required')">
+                        Amount is required
+                    </div>
+                    <div *ngIf="ordersGroup.controls.Amount.hasError('min')">
+                        Amount must be greater than or equal 1
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Total:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" formControlName="Total" readonly>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <button type="submit" class="btn btn-primary" (click)="Add()">Add</button>
+                    </div>
+                    <div class="col-sm">
+                      <button type="submit" class="btn btn-primary" (click)="Update()">Update</button>
+                    </div>
+                    <div class="col-sm">
+                      <button type="submit" class="btn btn-primary" (click)="Clear()">Clear</button>
+                    </div>
+                  </div>
+                </div>     
+            </div>
+            <br/>
+
+
+        <div class="table-responsive text-center">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders | async; index as idx">
+                        <th scope="row">{{idx + 1}}</th>
+                        <td>{{order.OrderDate | date: 'MM/dd/yyyy' }}</td>
+                        <td>{{order.Description}}</td>
+                        <td>{{order.Amount | number: '1.2-2' }}</td>
+                        <td>{{order.Quantity}}</td>
+                        <td>{{order.Total | number: '1.2-2'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" (click)="onEdit(order.Id)">Edit</button>&nbsp;
+                            <button type="button" class="btn btn-outline-primary" (click)="onDelete(order.Id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </form>
 </div>
